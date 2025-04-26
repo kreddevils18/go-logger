@@ -26,7 +26,7 @@ go get github.com/kreddevils18/go-logger
 package main
 
 import (
-	"github.com/kreddevils18/go-logger/gologger"
+	"github.com/kreddevils18/go-logger"
 )
 
 func main() {
@@ -61,7 +61,7 @@ You can customize the logger with various configuration options:
 package main
 
 import (
-	"github.com/kreddevils18/go-logger/gologger"
+	"github.com/kreddevils18/go-logger"
 )
 
 func main() {
