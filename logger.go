@@ -112,11 +112,11 @@ func NewLogger(cfg *Config) (Logger, error) { // Return Logger interface
 	}
 
 	// Ensure caller information is included
-	// Add AddCallerSkip(2) because we have two levels of wrappers:
-	// 1. The zapLoggerImpl methods (like Debug, Info, etc.)
-	// 2. The NewLogger function itself
-	// Note: If only using embedding, AddCallerSkip(1) would suffice.
-	loggerCore, err := zapCfg.Build(zap.AddCaller(), zap.AddCallerSkip(2))
+        // Add AddCallerSkip(1) because we wrap zap's logger once in
+        // zapLoggerImpl before reaching the user's call site. This ensures the
+        // reported file and line number point to the caller of our Logger
+        // methods rather than to this wrapper or zap internals.
+        loggerCore, err := zapCfg.Build(zap.AddCaller(), zap.AddCallerSkip(1))
 	if err != nil {
 		return nil, err
 	}
